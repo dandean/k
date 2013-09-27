@@ -59,7 +59,7 @@ exports.handle = function(e, fn){
   if (ignore && ignore(e)) return;
 
   // match
-  for (var i = 0; i < len; ++i) {
+  for (var i = len - 1; i > -1; --i) {
     invoke = true;
     handle = all[i];
     mods = handle.mods;
@@ -72,7 +72,10 @@ exports.handle = function(e, fn){
       }
     }
 
-    invoke && handle.fn(e);
+    if (invoke) {
+      // Do not execute remaining if current returns false:
+      if (handle.fn(e) === false) break;
+    }
   }
 };
 
