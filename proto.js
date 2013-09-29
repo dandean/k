@@ -170,10 +170,7 @@ exports.clear = function(e){
   var code = e.keyCode;
   if (!(code in modifiers)) return;
   this[modifiers[code]] = null;
-  this.modifiers = this.command
-    || this.shift
-    || this.ctrl
-    || this.alt;
+  this.modifiers = !!(this.command || this.shift || this.ctrl || this.alt);
 };
 
 /**
